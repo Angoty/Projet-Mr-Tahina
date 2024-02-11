@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map</title>
+</head>
+<body>
+    <div id="map" style="height: 800px"></div>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  <script>
+    // Fonction pour initialiser la carte
+    function initMap() {
+      // Récupérer le GeoJSON et les options de la carte passés depuis Flask
+      var geojson = {{ map_geojson|tojson|safe }};
+      var mapOptions = {{ map_options|tojson|safe }};
+      // Créer la carte
+      var map = L.map('map',mapOptions).setView({{ map_options['center'] }},8);
+      // Ajouter les tuiles OpenStreetMap
+      var osmUrl='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+      var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+      var osm = new L.TileLayer(osmUrl, {attribution: osmAttrib});
+      osm.addTo(map);
+      // Ajouter le GeoJSON
+      var geojsonLayer = L.geoJson(JSON.parse(geojson));
+      geojsonLayer.addTo(map);
+      // Adapter la vue pour inclure toutes les données
+      map.fitBounds(geojsonLayer.getBounds());
+    }
+    // Appeler la fonction d'initialisation de la carte quand la page est prête
+    document.addEventListener('DOMContentLoaded', initMap);
+
+    function  initmap2(){
+        var map =L.map('map',{
+            center: [-18.9333, 47.5167],
+            zoom:6
+        })
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+            maxZoom:12
+        }).addTo(map)
+    }
+
+  </script>
+</body>
+</html>

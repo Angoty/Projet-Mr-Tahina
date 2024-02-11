@@ -1,0 +1,3 @@
+CREATE ROLE angoty;
+CREATE DATABASE routes WITH OWNER= angoty;
+
