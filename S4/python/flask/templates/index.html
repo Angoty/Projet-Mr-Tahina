@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>first html test</title>
+</head>
+<body>
+        <form action="/process_form" method="POST">
+              <label for="my_choice">Sélectionnez une route:</label>
+              <select name="my_choice" id="my_choice">
+                {% for r in rn %}
+                <option value="{{ r.getIdr() }}">{{ r.getRn()}}</option>
+                {% endfor %}
+              </select>
+        <br>
+            <input type="number" name="pk_d" placeholder="pk_d"><input type="number" name="pk_a" placeholder="pk_a">
+        <br>
+              <input type="submit" value="Valider">
+        </form>
+</body>
+</html>
