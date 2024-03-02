@@ -1,0 +1,12 @@
+﻿body {
+}
+
+#profil {
+    width: 800px;
+    margin-left: 150px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-left: 50px;
+    height: 1200px; 
+    padding-top: 50px;
+}

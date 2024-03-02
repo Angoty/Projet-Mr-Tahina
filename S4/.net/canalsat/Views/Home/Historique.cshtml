@@ -1,0 +1,36 @@
+﻿
+@model List<Abonnement>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div id="profil">
+        <h3 style="text-align:center">CANAL+</h3>
+        <hr/>
+        <h4 style="text-align:center">Historique d'abonnement</h4>
+        <h5>Identifiant: @ViewBag.idClient</h5>
+        <h5>Nom: @ViewBag.nomClient</h5>
+        <table class="table table-hover">
+            <th>Offre</th>
+            <th>Date debut</th>
+            <th>Date Fin</th>
+            <th>Prix Unitaire</th>
+                @foreach (var abonnement in Model)
+                {
+                  <tr>
+                    <td>@abonnement.offre</td>
+                    <td>@abonnement.dateDebut</td>
+                    <td>@abonnement.dateFin</td>
+                    <td>@abonnement.prix Ar</td>
+                  </tr>
+                }
+</table>
+</div>
+
+</body>
+</html>
