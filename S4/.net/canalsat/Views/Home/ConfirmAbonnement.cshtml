@@ -1,0 +1,19 @@
+﻿
+@model List<Chaine>
+<div id="confirm">
+     <h3 style="text-align:center">CANAL+</h3>
+     <hr />
+    <form action="/Home/Abonnement" method="post">
+    <h3>Confirmer votre abonnement</h3>
+    <h5>Ajouter des chaines supplementaires</h5>
+    @foreach (var channel in Model)
+    {
+       <p> <input type="checkbox" id="perso" value="@channel.idChaine" name="perso">    @channel.nomChaine    @channel.prix Ar </p>
+    }
+    <input type="hidden" name="idClient" value="@ViewBag.idClient" />
+    <input type="hidden" name="idBouquet" value="@ViewBag.idBouquet" />
+     <button type="submit" class="btn btn-success" style="margin-left:200px">S'abonner</button>
+    </form>
+</div>
+
+

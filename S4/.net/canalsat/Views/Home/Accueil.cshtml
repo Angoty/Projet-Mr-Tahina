@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Accueil";
+}
+@model AccueilModel
+
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="profil">
+            <h3 style="text-align:center">CANAL+</h3>
+            <hr />
+            <h6>Votre nom: @Model.client.nomClient</h6>
+            <h6>Region: @Model.client.localisation</h6>
+            <h6>Date du jour: @DateTime.Now</h6>
+            @if(@Model.abonnement == null)
+            {
+                <h4>Vous n'avez souscrit à aucune offre</h4>
+            }
+            else
+            {
+                <form action="/home/Reabonnement" method="post">
+                    <input type="hidden" name="idClient" value="@Model.client.idClient">
+                    @if (Model.abonnement.dateFin >= DateTime.Now)
+                    {
+                        <h6>Vous etes sur l'offre : @Model.abonnement.offre</h6>
+                        <h6>Prix: @Model.abonnement.prix Ar</h6>
+                        <h6>Du @Model.abonnement.dateDebut au @Model.abonnement.dateFin</h6>
+                    }
+                    else
+                    {
+                        <h6>Votre derniere offre : @Model.abonnement.offre</h6>
+                        <h6>Prix: @Model.abonnement.prix Ar</h6>
+                        <h6>Du @Model.abonnement.dateDebut au @Model.abonnement.dateFin</h6>
+                    }
+                    <button type="submit" class="btn btn-success">Reabonnement</button>
+                </form>
+            }
+    <hr />
+    <h3>Les offres disponibles dans votre localisation</h3>
+    <h4>Bouquets</h4>
+          <table class="table table-hover">
+            <th>Bouquet</th>
+            <th>Remise</th>
+            <th>Prix avec remise</th>
+            <th>S'abonner</th>
+                @foreach (var bouquet in Model.bouquets)
+                {
+                  <tr>
+                    <td>@bouquet.nomBouquet</td>
+                    <td>@bouquet.remise %</td>
+                    <td>@bouquet.prix Ar</td>
+                    <td><a href="/Home/ConfirmAbonnement?idClient=@Model.client.idClient&idBouquet=@bouquet.idBouquet" class="link-success">Choisir</a></td>
+                  </tr>
+                }
+        </table
+
+    
+ 
+     </div>
+
+        <form action="/home/Specifique" method="post">
+        <h4>Personnaliser votre bouquet</h4>
+        <input type="hidden" name="idClient" value="@Model.client.idClient" />
+        <table class="table table-hover">
+        <th>NomChaine</th>
+        <th>Prix</th>
+            @foreach (var channel in Model.chaines)
+            {
+               <tr>
+                    <td><input type="checkbox" id="perso" value="@channel.idChaine" name="perso">     @channel.nomChaine</td>
+                    <td>@channel.prix Ar</td> 
+                </tr>
+            }
+        </table>
+        <button type="submit" class="btn btn-success">Choisir</button>
+    </form>
+</body>
+</html>

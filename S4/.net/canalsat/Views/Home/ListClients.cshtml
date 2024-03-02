@@ -1,0 +1,33 @@
+﻿
+@model List<Client>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="profil">
+        <h3 style="text-align:center">CANAL+</h3>
+        <hr/>
+        <h3 style="text-align:center">Liste des clients</h3>
+        <table class="table table-hover">
+            <th>Identifiant</th>
+            <th>Nom</th>
+            <th>Localisation</th>
+            <th>Voir</th>
+                @foreach (var client in Model)
+                {
+                  <tr>
+                    <td>@client.idClient</td>
+                    <td>@client.nomClient</td>
+                    <td>@client.localisation</td>
+                    <td><a href="/home/historique?idClient=@client.idClient">Voir</a></td>
+                  </tr>
+                }
+        </table>
+    </div>
+</body>
+</html>
